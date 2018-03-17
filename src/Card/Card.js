@@ -3,25 +3,29 @@ import PropTypes from 'prop-types';
 import './Card.css';
 
 
-const Card = ({ location, stats, selectLocation, selectedLocations }) => {
+const Card = ({ location, stats, selectLocation, selectedLocations, id }) => {
 
   const isSelected = selectedLocations.some(district => {
     return district.location === location;
   });
   const selected = isSelected ? 'selected' : '';
+  
   const dataPoints = Object.keys(stats).map((timeFrame, index) => {
     return (
       <li key={index} className={stats[timeFrame] < 0.5 ? 'red' : ''}>
-        {timeFrame}: {Math.round(stats[timeFrame] * 100) / 100}
+        {timeFrame}: {Math.round(stats[timeFrame] * 100) / 100} %
       </li>
     );
   });    
 
   return (
     <article 
+      id={id}
       className={`district ${selected}`}
       onClick={() => selectLocation(location)} >
-      <h3>{location}</h3>
+      <header>
+        <h3>{location}</h3>
+      </header>
       <ul>
         {dataPoints}
       </ul>
@@ -33,7 +37,8 @@ Card.propTypes = {
   location: PropTypes.string.isRequired,
   stats: PropTypes.object.isRequired,
   selectLocation: PropTypes.func.isRequired,
-  selectedLocations: PropTypes.array.isRequired
+  selectedLocations: PropTypes.array.isRequired,
+  id: PropTypes.string
 };
 
 export default Card;
