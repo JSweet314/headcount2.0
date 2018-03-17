@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CardsContainer from '../CardsContainer/CardsContainer.js';
 import Search from '../Search/Search.js';
 import './App.css';
+import '../index.css';
 
 class App extends Component {
   constructor(props) {
@@ -45,16 +46,18 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <Search 
           clearSearch={this.clearSearch}
           searchValue={this.state.searchValue}
           searchDistrict={this.searchDistrict} />
-        <CardsContainer 
-          districts={ this.state.districts } 
-          searchValue={this.state.searchValue}
-          selectLocation={this.selectLocation} 
-          selectedLocations={this.state.selectedLocations} />
+        <div className="Cards-container">
+          <CardsContainer 
+            districts={this.state.districts} 
+            searchValue={this.state.searchValue}
+            selectLocation={this.selectLocation} 
+            selectedLocations={this.state.selectedLocations} />
+        </div>
       </div>
     );
   }
